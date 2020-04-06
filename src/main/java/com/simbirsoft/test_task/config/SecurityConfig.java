@@ -1,6 +1,7 @@
 package com.simbirsoft.test_task.config;
 
 import com.simbirsoft.test_task.service.UserService;
+import com.simbirsoft.test_task.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,10 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(
-                        "/actuator",
-                        "/actuator/*"
-                ).permitAll()
+                .antMatchers("/actuator").hasAuthority(RoleName.ADMIN.getValue())
+                .antMatchers("/actuator/*").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll();
