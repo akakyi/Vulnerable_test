@@ -2,7 +2,6 @@ package com.simbirsoft.test_task.service.impl;
 
 import com.simbirsoft.test_task.db.entity.User;
 import com.simbirsoft.test_task.db.repository.UserRepository;
-import com.simbirsoft.test_task.dto.security.UserSecurity;
 import com.simbirsoft.test_task.service.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +35,13 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Optional<User> user = this.userRepository.findByLogin(s);
         User dbUser = user.orElseThrow(() -> new UsernameNotFoundException(s));
-        UserSecurity userSecurity = new UserSecurity(dbUser);
+
+        String role = dbUser.getRole().getName();
+        UserDetails userSecurity = org.springframework.security.core.userdetails.User
+                .withUsername(dbUser.getLogin())
+                .password(dbUser.getPassword())
+                .roles(role)
+                .build();
 
         return userSecurity;
     }
