@@ -1,0 +1,11 @@
+The vulnerability is that the actuator endpoints are not sufficiently protected and become accessible to many users,
+including an attacker who will have access to monitor and even manage many aspects of the application.
+
+An attacker can gain access to:
+1) View all possible mappings, bins, applied migrations, system resources, etc.
+2) Application management. An attacker will be able to delete user sessions or even completely stop the application.
+
+Consequences of weak protection of actuators:
+1) The receipt by the attacker of information for further attacks.
+2) Loss of intermediate user data.
+3) Unexpected stop of the entire application.
