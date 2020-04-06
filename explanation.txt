@@ -1,0 +1,3 @@
+Change the base URL for actuators. This prevents the attacker from contacting them using the standard URL,
+but still does not protect them. If the attacker in any way recognizes our custom URL,
+then a similar solution will be useless.
