@@ -1,0 +1,2 @@
+Removing the <code>management.endpoints.web.exposure.include</code> setting formally solves the problem,
+because disables most of the actuators on the web. But at the same time, it does not allow us to use them ourselves.
